@@ -134,6 +134,13 @@ python app.py
 set "EXIT_CODE=!ERRORLEVEL!"
 
 :cleanup
+if not "!EXIT_CODE!"=="0" (
+    echo.
+    echo Скрипт завершился с ошибкой. Код возврата: !EXIT_CODE!
+    if defined LOG_FILE echo Подробности смотрите в логе: !LOG_FILE!
+    echo Нажмите Enter, чтобы закрыть окно...
+    set /p "PAUSE_ON_ERROR="
+)
 if defined OLD_CP chcp !OLD_CP! >nul
 if defined LOG_FILE echo Полный лог работы скрипта: %LOG_FILE%
 endlocal
